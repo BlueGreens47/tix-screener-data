@@ -462,6 +462,27 @@ Sub SelectedHistorical() ' get uptodate Ticker Data
    
 End Sub
 
+' ===== SHARED ERROR HANDLING & CONFIRMATION =====
+
+Sub HandleProcessingError(procedureName As String, errObj As ErrObject)
+    Dim msg As String
+    msg = "Error in " & procedureName & ":" & vbCrLf & _
+          "Error " & errObj.Number & ": " & errObj.Description
+    Debug.Print msg
+    If Not pubNotice And Not perfTest Then MsgBox msg, vbExclamation, "Processing Error"
+    Call ResetApplicationSettings
+End Sub
+
+Function ConfirmProcessing() As Boolean
+    ' Returns True to skip the prompt (auto-confirm), False to show GetUserInputs dialog
+    ' Called when pubNotice=False and perfTest=False (interactive mode)
+    Dim response As VbMsgBoxResult
+    response = MsgBox("Run with current dashboard settings?" & vbCrLf & _
+                      "(No = enter custom parameters)", _
+                      vbYesNo + vbQuestion, "Confirm Run")
+    ConfirmProcessing = (response = vbYes)
+End Function
+
 Sub ClearAllFilters()
     Dim ws As Worksheet
     For Each ws In ActiveWorkbook.Worksheets
