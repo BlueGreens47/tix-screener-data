@@ -47,7 +47,7 @@ Sub ProcessAll()
     End If
 
 Cleanup:
-    Call UpdateBackupAll
+    Call BackupALLAndSort  ' Deduplicates and sorts BackupAll sheet after processing
     'Call UploadToDrive
     
     Exit Sub

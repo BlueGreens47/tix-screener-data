@@ -503,7 +503,7 @@ Sub DataFromBackup(analysisDate As Date)
     End If
     
     Call DeleteNARows(wsTo)
-    Call CalcATR
+    Call UpdateSystemWithATR  ' ATR zones + risk management (ATRCalculation.bas)
     
 FinalCleanup:
     ' Re-enable application settings

@@ -183,8 +183,8 @@ NextTicker:
         wsData.Range("A2").Resize(outputIndex, 7).Value2 = outputData
     End If
     
-    Call UpdateDataWithATR_Complete
-    Call UpdateDataWithEnhancedIndicators
+    Call UpdateSystemWithATR
+    Call CalculateIndicators
     
     Application.ScreenUpdating = True
     Application.Calculation = xlCalculationAutomatic

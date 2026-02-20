@@ -192,7 +192,7 @@ Sub FilterAndReport_Enhanced()
         ' Load ALL qualifying tickers and calculate indicators
         Call LoadAllQualifyingTickersData(wsDash, qualifyingTickers, analysisDate)
         Call CalculateIndicators  ' Fixed: CalculateEnhancedIndicators was from CompleteIndicatorCalculations.bas which uses a different/incompatible column layout. CalculateIndicators (Indicators.bas) writes the correct columns (9=CompositeScore, 10=RSI, 11=MACD, 12=MACDSignal, 13=PriceVsMA, 14=ATR, 15=ATR%, 16=VolumeSpike).
-        Call UpdateSystemWithATR_Complete  ' ? ATR CALCULATION
+        Call UpdateSystemWithATR  ' ATR zones + risk management (ATRCalculation.bas)
         
         ' Generate final trading signals
         Call GenerateCompleteTradingSignals_Integrated

@@ -37,9 +37,10 @@ Sub RunScheduledTask()
     End With
     
     ' Run Tuesday calculation if needed (only if Tuesday is a workday)
+    ' Refreshes fundamental scores (PE, ROE, FCF etc.) on the TJX sheet weekly
     If weekday(Date, vbMonday) = 2 And IsWorkday(Date) Then
-        LogMessage "Running Tuesday calculation..."
-        Call CalcFundamentals
+        LogMessage "Running Tuesday fundamentals calculation..."
+        Call CalculateTJXScore  ' FairValue.bas: DCF + PE/PB/ROE ratings for all TJX tickers
     End If
     
     ' Process main tasks

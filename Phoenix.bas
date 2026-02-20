@@ -6,7 +6,7 @@ Sub TradeMaster()
     startTime = Timer
     
     Call MasterDataFromBackup
-    Call UpdateSystemWithATR_Complete
+    Call UpdateSystemWithATR  ' ATR zones + risk management (ATRCalculation.bas)
     Call CalculateIndicators  ' Fixed: was CalculateEnhancedIndicators (wrong column layout)
     
     'Call GenerateCompleteTradingSignals_Main
