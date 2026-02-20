@@ -191,7 +191,7 @@ Sub FilterAndReport_Enhanced()
         
         ' Load ALL qualifying tickers and calculate indicators
         Call LoadAllQualifyingTickersData(wsDash, qualifyingTickers, analysisDate)
-        Call CalculateEnhancedIndicators
+        Call CalculateIndicators  ' Fixed: CalculateEnhancedIndicators was from CompleteIndicatorCalculations.bas which uses a different/incompatible column layout. CalculateIndicators (Indicators.bas) writes the correct columns (9=CompositeScore, 10=RSI, 11=MACD, 12=MACDSignal, 13=PriceVsMA, 14=ATR, 15=ATR%, 16=VolumeSpike).
         Call UpdateSystemWithATR_Complete  ' ? ATR CALCULATION
         
         ' Generate final trading signals
@@ -409,7 +409,7 @@ Sub GenerateTradingSignalsForAllTickers(qualifyingTickers As Collection, analysi
     Call LoadAllQualifyingTickersData(wsDash, tickers, analysisDate)
     
     ' Calculate indicators for all tickers
-    Call CalculateEnhancedIndicators
+    Call CalculateIndicators  ' Fixed: CalculateEnhancedIndicators was from CompleteIndicatorCalculations.bas which uses a different/incompatible column layout. CalculateIndicators (Indicators.bas) writes the correct columns (9=CompositeScore, 10=RSI, 11=MACD, 12=MACDSignal, 13=PriceVsMA, 14=ATR, 15=ATR%, 16=VolumeSpike).
     Call CalculateATRWithSignals_Optimized
     
     ' Generate signals for all tickers
@@ -451,7 +451,7 @@ End Sub
 ' COMPLETE TRADING SIGNAL GENERATION WITH RISK MANAGEMENT
 Sub GenerateCompleteTradingSignals()
     ' Ensure all calculations are up to date
-    Call CalculateEnhancedIndicators
+    Call CalculateIndicators  ' Fixed: CalculateEnhancedIndicators was from CompleteIndicatorCalculations.bas which uses a different/incompatible column layout. CalculateIndicators (Indicators.bas) writes the correct columns (9=CompositeScore, 10=RSI, 11=MACD, 12=MACDSignal, 13=PriceVsMA, 14=ATR, 15=ATR%, 16=VolumeSpike).
     Call CalculateATRWithSignals_Optimized
     Call GenerateTradingSignalsWithRiskManagement
 End Sub

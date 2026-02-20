@@ -7,7 +7,7 @@ Sub TradeMaster()
     
     Call MasterDataFromBackup
     Call UpdateSystemWithATR_Complete
-    Call CalculateEnhancedIndicators
+    Call CalculateIndicators  ' Fixed: was CalculateEnhancedIndicators (wrong column layout)
     
     'Call GenerateCompleteTradingSignals_Main
     'Call MasterWeeklyTradingStrategyAndSignals
