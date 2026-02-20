@@ -130,8 +130,9 @@ Sub FilterAndReport_Enhanced()
 
         ' Process batch data
         Call DataFromBackup(analysisDate)
-        Call CalculateRSISignals
-        
+        ' Note: CalculateRSISignals removed — it was a dev/test tool targeting "RSITest"
+        ' sheet with InputBox prompts. RSI is calculated by CalculateEnhancedIndicators below.
+
         ' Calculate and process
         Application.CALCULATION = xlCalculationAutomatic
         DoEvents
@@ -441,8 +442,7 @@ Sub LoadAllQualifyingTickersData(wsDash As Worksheet, tickers() As String, analy
     ' Fetch historical data for all qualifying tickers
     Call DataFromBackup(analysisDate)
     
-    ' Calculate indicators
-    Call CalculateRSISignals
+    ' Calculate indicators (CalculateRSISignals removed — dev-only tool, RSI handled by CalculateEnhancedIndicators)
     Application.CALCULATION = xlCalculationAutomatic
     DoEvents
     Application.CALCULATION = xlCalculationManual
