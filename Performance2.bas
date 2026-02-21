@@ -316,24 +316,26 @@ Function newIsValidGroupFormat(groupValue As String) As Boolean
     IsValidGroupFormat = (Len(groupValue) > 0 And InStr(groupValue, "Group") > 0)
 End Function
 
-Function GetNextMonday(currentDate As Date) As Date
+Private Function GetNextMonday(currentDate As Date) As Date
     ' Return the next Monday after currentDate
+    ' Private: canonical public version lives in Filtering.bas
     Dim daysToMonday As Integer
     daysToMonday = (9 - Weekday(currentDate)) Mod 7
     If daysToMonday = 0 Then daysToMonday = 7 ' If it's already Monday, go to next Monday
     GetNextMonday = DateAdd("d", daysToMonday, currentDate)
 End Function
 
-Function GetNextWorkday(currentDate As Date) As Date
+Private Function GetNextWorkday(currentDate As Date) As Date
     ' Return the next workday (Monday-Friday)
+    ' Private: canonical public version lives in Scheduling.bas
     Dim nextDay As Date
     nextDay = DateAdd("d", 1, currentDate)
-    
+
     ' Skip weekends
     Do While Weekday(nextDay) = vbSaturday Or Weekday(nextDay) = vbSunday
         nextDay = DateAdd("d", 1, nextDay)
     Loop
-    
+
     GetNextWorkday = nextDay
 End Function
 

@@ -519,43 +519,4 @@ Sub CreateAndOutputSignalsSheet(signals() As Variant, signalCount As Long)
     Call FastFormatWeeklySignals(wsSignals, signalCount)
 End Sub
 
-' ===== FORMAT WEEKLY SIGNALS OUTPUT SHEET =====
-Sub FastFormatWeeklySignals(wsSignals As Worksheet, signalCount As Long)
-    If signalCount <= 0 Then Exit Sub
-
-    Dim lastDataRow As Long
-    lastDataRow = signalCount + 1  ' +1 for header row
-
-    With wsSignals
-        ' Bold header row
-        .Rows(1).Font.Bold = True
-        .Rows(1).Interior.Color = RGB(31, 73, 125)
-        .Rows(1).Font.Color = RGB(255, 255, 255)
-
-        ' Number formats for numeric columns
-        .Range("E2:J" & lastDataRow).NumberFormat = "#,##0.00"   ' Price, Stop, Target, PositionSize, Risk%, R:R
-        .Range("K2:R" & lastDataRow).NumberFormat = "0.00"       ' RSI, MACD, MACD Signal, PriceVsMA, Score, Vol, ATR%, IBS
-        .Range("S2:T" & lastDataRow).NumberFormat = "0.00"       ' WeeklyRange, Volatility
-        .Range("B2:B" & lastDataRow).NumberFormat = "yyyy-mm-dd" ' Date
-
-        ' Conditional colour: BUY rows green, SELL rows red
-        Dim i As Long
-        For i = 2 To lastDataRow
-            Dim sig As String
-            sig = CStr(.Cells(i, 3).value)  ' Signal column
-            If InStr(1, sig, "BUY", vbTextCompare) > 0 Then
-                .Rows(i).Interior.Color = RGB(198, 239, 206)  ' Light green
-            ElseIf InStr(1, sig, "SELL", vbTextCompare) > 0 Then
-                .Rows(i).Interior.Color = RGB(255, 199, 206)  ' Light red
-            End If
-        Next i
-
-        ' Auto-fit all columns
-        .Columns.AutoFit
-
-        ' Freeze header row
-        .Activate
-        .Range("A2").Select
-        ActiveWindow.FreezePanes = True
-    End With
-End Sub
+' FastFormatWeeklySignals is defined in WeeklySignals.bas — do not duplicate here.

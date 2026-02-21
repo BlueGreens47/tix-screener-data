@@ -1,5 +1,5 @@
 Attribute VB_Name = "RateConversion"
-Sub UpdateExchangeRates()
+Private Sub UpdateExchangeRates()  ' Private: canonical public version in XchgeRates.bas
     Dim http As Object
     Dim json As Object
     Dim wsRates As Worksheet
@@ -36,7 +36,7 @@ Sub UpdateExchangeRates()
     MsgBox "Exchange rates updated!", vbInformation
 End Sub
 
-Sub ConvertStockPrices()
+Private Sub ConvertStockPrices()  ' Private: canonical public version in XchgeRates.bas
     Dim ws As Worksheet, wsRates As Worksheet
     Dim lastRow As Long, i As Long
     Dim exchange As String, ticker As String
