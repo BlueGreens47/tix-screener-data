@@ -48,7 +48,7 @@ Sub ProcessAll()
 
 Cleanup:
     Call BackupALLAndSort  ' Deduplicates and sorts BackupAll sheet after processing
-    'Call UploadToDrive
+    Call UploadToDrive
     
     Exit Sub
     
@@ -523,7 +523,33 @@ Sub SaveAndClose()
     wb.Save
     wb.Close SaveChanges:=True
     Application.Quit
-    
+
+End Sub
+
+' ===== GOOGLE DRIVE BACKUP =====
+
+Sub UploadToDrive()
+    Const PYTHON_EXE    = "C:\Users\judej\AppData\Local\Programs\Python\Python313\python.exe"
+    Const PYTHON_SCRIPT = "C:\Users\judej\TJX\drive_upload.py"
+    Const LOG_FILE      = "C:\Users\judej\TJX\upload_log.txt"
+
+    ' Write a timestamp so we know VBA triggered it
+    Dim fNum As Integer
+    fNum = FreeFile
+    Open LOG_FILE For Append As #fNum
+    Print #fNum, "--- VBA triggered upload: " & Now() & " ---"
+    Close #fNum
+
+    ' Run Python directly — Shell is fire-and-forget (non-blocking)
+    Dim pid As Long
+    pid = Shell("""" & PYTHON_EXE & """ """ & PYTHON_SCRIPT & """", vbHide)
+
+    If pid = 0 Then
+        fNum = FreeFile
+        Open LOG_FILE For Append As #fNum
+        Print #fNum, "ERROR: Shell failed to launch Python — check PYTHON_EXE path"
+        Close #fNum
+    End If
 End Sub
 
 
